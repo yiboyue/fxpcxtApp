@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxpcxt.dao.UserMapper">
+    <select id="login" parameterType="User" resultType="User">
+        select * from user where account=#{account} and password=#{password}
+    </select>
+    <insert id="saveUser" parameterType="User">
+        insert into user(account,password,name,unitId,roleId,status,phone,orgnazationId) values(#{account},#{password},#{name},#{unitId},#{roleId},#{status},#{phone},#{orgnazationId})
+    </insert>
+    
+    <delete id="deleteUserById" parameterType="Long">
+        delete from user where id=#{id}
+    </delete>
+    <update id="updateUser" parameterType="User">
+        update user set account=#{account},password=#{password},name=#{name},unitId=#{unitId},roleId=#{roleId},status=#{status},phone=#{phone},orgnazationId=#{orgnazationId} where id=#{id}
+    </update>
+    <select id="getIdByName" parameterType="String" resultType="User">
+        select id from user where name=#{name}
+    </select> 
+    <select id="getUserById" parameterType="Long" resultType="User">
+        select * from user where id=#{id}
+    </select>
+    <select id="getAllUser" resultType="User">
+        select * from user
+    </select>
+</mapper>

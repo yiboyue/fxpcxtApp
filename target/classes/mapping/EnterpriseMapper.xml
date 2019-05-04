@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxpcxt.dao.EnterpriseMapper">
+    <insert id="saveEnterprise" parameterType="EnterPrise">
+        insert into enterprise(zoneId,name,linkman,address,phone,fundTime,size,workers,industryId,owerName,owerPost,owerPhone,owerOffice) values(#{zoneId},#{name},#{linkman},#{address},#{phone},#{fundTime},#{size},#{workers},#{industryId},#{owerName},#{owerPost},#{owerPhone},#{owerOffice})
+    </insert>
+    
+    <delete id="deleteEnterpeiseById" parameterType="Long">
+        delete from enterprise where id=#{id}
+    </delete>
+    <select id="getEnterpriseById" parameterType="Long" resultType="Enterprise">
+        select * from enterprise where id=#{id}
+    </select>
+    <update id="updateEnterprise" parameterType="Enterprise">
+        update enterprise set zoneId=#{zoneId},linkman=#{linkman},phone=#{phone},size=#{size},workers=#{workers}
+    </update>
+    <select id="getEnterpriseIdByName" parameterType="String" resultType="Enterprise">
+        select * from enterprise where name=#{name}
+    </select>
+    <select id="getAllEnterpriseByZoneId" parameterType="Long" resultType="Enterprise">
+        select * from enterprise where zoneId=#{zoneId}
+    </select>
+    <select id="selectAllEnterpriseInfo" resultType="Enterprise">
+        select * from enterprise
+    </select>
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxpcxt.dao.HazardMapper">
+    <select id="getIdByName" parameterType="String" resultType="Hazard">
+        select * from hazard where name=#{name}
+    </select>
+    <insert id="saveHazard" parameterType="Hazard">
+        insert into hazard(id,name)values(#{id},#{name})
+    </insert>
+    <select id="getHazardById" parameterType="Long" resultType="Hazard">
+        select * from hazard where id=#{id}
+    </select>
+</mapper>  

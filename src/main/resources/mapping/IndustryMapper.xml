@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxpcxt.dao.IndustryMapper">
+    <select id="getIndustry" parameterType="String" resultType="Industry">
+        select * from industry where name=#{name}
+    </select>
+    
+    <insert id="saveIndustry" parameterType="Industry" useGeneratedKeys="true" keyProperty="id">
+    	insert into industry(id,name) values(#{id},#{name})   
+    </insert>
+    <select id="getIndustryById" parameterType="Long" resultType="Industry">
+        select * from industry where id=#{id}
+    </select>
+</mapper>

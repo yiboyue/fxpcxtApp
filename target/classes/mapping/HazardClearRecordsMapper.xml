@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxpcxt.dao.HazardClearRecordsMapper">
+    <insert id="saveHazardClearRecords" parameterType="HazardClearRecords">
+        insert into hazardClearRecords
+        (hazardId,enterpriseId,checkerId,checkImg,checkReception,checkTime,status,hazardLevel,changerId,changeImg,changeReception)
+         values
+         (#{hazardId},#{enterpriseId},#{checkerId},#{checkImg},#{checkReception},#{checkTime},#{status},#{hazardLevel},#{changerId},#{changeImg},#{changeReception})
+    </insert>
+    
+    <delete id="deleteHazardClearRecordsById" parameterType="Long" >
+        delete from hazardClearRecords where id=#{id}
+    </delete>
+    
+    <update id="updateHazardClearRecords" parameterType="HazardClearRecords" >
+        update hazardClearRecords set checkImg=#{checkImg},checkReception=#{checkReception},status=#{status},hazardLevel=#{hazardLevel},changeImg=#{changeImg},changeReception=#{changeReception} where id=#{id} 
+    </update>
+    <select id="getHazardClearRecordsAll" resultType="HazardClearRecords">
+        select * from hazardClearRecords 
+    </select>
+    <select id="getEnterPriseHazardClearRecords" parameterType="Long" resultType="HazardClearRecords">
+        select * from hazardClearRecords where enterpriseId=#{enterpriseId}
+    </select>
+    <select id="getHazardClearRecordsById" parameterType="Long" resultType="HazardClearRecords">
+        select * from hazardClearRecords where id=#{id}
+    </select>
+</mapper>

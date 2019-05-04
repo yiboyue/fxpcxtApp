@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxpcxt.dao.OrgnazationMapper">
+     <select id="getIdByName" parameterType="String" resultType="Orgnazation">
+        select * from unit where name=#{name}
+    </select>
+    <insert id="saveOrgnazation" parameterType="Orgnazation">
+        insert into orgnazation(id,name) values(#{id},#{name})
+    </insert>
+    <select id="getOrgnazationById" parameterType="Long" resultType="Orgnazation">
+        select * from orgnazation where id=#{id}
+    </select>
+</mapper>
