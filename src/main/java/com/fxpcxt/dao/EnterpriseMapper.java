@@ -13,6 +13,6 @@ public interface EnterpriseMapper {
 	public Enterprise getEnterpriseById(Long id);
 	public void updateEnterprise(Enterprise enterPrise);
 	public Enterprise getEnterpriseIdByName(String name);
-	public List<Enterprise> getAllEnterpriseByZoneId(Long zoneId);
+	public List<Enterprise> getAllEnterpriseByAddress(String address);
 	public List<Enterprise> selectAllEnterpriseInfo();
 }

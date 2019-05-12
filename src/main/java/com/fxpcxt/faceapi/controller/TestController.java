@@ -3,6 +3,7 @@ package com.fxpcxt.faceapi.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,6 +54,14 @@ public class TestController {
 		} catch (IOException e) {
 			return null;
 		}
-        return ApiFaceUtil.getUserByFace(fileMeta.getBytes());
+        ApiResponse apiResponse = ApiFaceUtil.getUserByFace(fileMeta.getBytes());
+        if (!"SUCCESS".equals(apiResponse.getErrorMsg())) {
+			throw new RuntimeException(apiResponse.getErrorMsg());
+		}else if (apiResponse.getResult() == null || CollectionUtils.isEmpty(apiResponse.getResult().getUsers())){
+			throw new RuntimeException("未找到用户信息");
+		}else if(apiResponse.getResult().getUsers().get(0).getScore()<80){
+			throw new RuntimeException("用户相似度较低");
+		}
+        return apiResponse;
 	}
 }

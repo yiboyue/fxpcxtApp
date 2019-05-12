@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fxpcxt.context.AppContext;
+import com.fxpcxt.context.CoreContext;
 import com.fxpcxt.dao.CheckerMapper;
 import com.fxpcxt.dao.EnterpriseMapper;
 import com.fxpcxt.dao.HazardClearRecordsMapper;
@@ -125,9 +127,42 @@ public class HazardClearRecordsServiceImpl implements HazardClearRecordsService 
 		}
 		hazardClearRecordsMapper.updateHazardClearRecords(hazardClearRecords);
 	}
-	
+	/**
+	 * 将用户自身所属企业的排查信息筛选出来
+	 */
 	@Override
 	public List<HazardClearRecords> getHazardClearRecordsAll() {
+		CoreContext coreContext=AppContext.getBizContext();
+		Long enterpriseId=coreContext.getUser().getEnterpriseId();
+		List<HazardClearRecords> list=hazardClearRecordsMapper.getEnterPriseHazardClearRecords(enterpriseId);
+		HazardClearRecords hazardClearRecords=new HazardClearRecords();
+		Hazard hazard=new Hazard();
+		Enterprise enterprise=enterpriseMapper.getEnterpriseById(enterpriseId);
+		Checker checker=new Checker();
+		User user=new User();
+		for(int i=0;i<list.size();i++){
+			hazardClearRecords=list.get(i);
+			hazardClearRecords.setEnterpriseId(enterpriseId);
+			hazardClearRecords.setEnterpriseName(enterprise.getName());
+			hazard=hazardMapper.getHazardById(hazardClearRecords.getHazardId());
+			if(hazard!=null){
+				hazardClearRecords.setHazardName(hazard.getName());
+			}
+			
+			checker=checkerMapper.getCheckerById(hazardClearRecords.getCheckerId());
+			if(checker!=null){
+				hazardClearRecords.setCheckerName(checker.getName());
+			}
+			user=userMapper.getUserById(hazardClearRecords.getChangerId());
+			if(user!=null){
+				hazardClearRecords.setChangerName(user.getName());
+			}
+			
+		}
+		return list;
+		/*
+		 * CoreContext coreContext=AppContext.getBizContext();
+		Long enterpriseId=coreContext.getUser().getEnterpriseId();
 		List<HazardClearRecords> list=hazardClearRecordsMapper.getHazardClearRecordsAll();
 		HazardClearRecords hazardClearRecords=new HazardClearRecords();
 		Hazard hazard=new Hazard();
@@ -154,7 +189,7 @@ public class HazardClearRecordsServiceImpl implements HazardClearRecordsService 
 			}
 			
 		}
-		return list;
+		return list;*/
 	}
 
 	@Override
