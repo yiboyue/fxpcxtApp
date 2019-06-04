@@ -23,7 +23,7 @@ public class EnterpriseServiceImpl implements EnterpriseService{
 	private IndustryMapper industryMapper;
 	@Override
 	public void saveEnterprise(Enterprise enterprise) {
-		Zone zone=zoneMapper.getZone(enterprise.getZoneName());
+		/*Zone zone=zoneMapper.getZone(enterprise.getZoneName());
 		if(zone != null){
 			enterprise.setZoneId(zone.getId());
 		}else{
@@ -31,7 +31,7 @@ public class EnterpriseServiceImpl implements EnterpriseService{
 			zone.setName(enterprise.getZoneName());
 			zoneMapper.saveZone(zone);
 			enterprise.setZoneId(zone.getId());
-		}
+		}*/
 		Industry industry=industryMapper.getIndustry(enterprise.getIndustryName());
 		if(industry != null){
 			enterprise.setIndustryId(industry.getId());
@@ -58,7 +58,7 @@ public class EnterpriseServiceImpl implements EnterpriseService{
 	}
 	@Override
 	public void updateEnterprise(Enterprise enterprise) {
-		Zone zone=zoneMapper.getZone(enterprise.getZoneName());
+		/*Zone zone=zoneMapper.getZone(enterprise.getZoneName());
 		if(zone != null){
 			enterprise.setZoneId(zone.getId());
 		}else{
@@ -66,7 +66,7 @@ public class EnterpriseServiceImpl implements EnterpriseService{
 			zone.setName(enterprise.getZoneName());
 			zoneMapper.saveZone(zone);
 			enterprise.setZoneId(zone.getId());
-		}
+		}*/
 		enterpriseMapper.updateEnterprise(enterprise);
 	}
 	@Override
@@ -75,17 +75,17 @@ public class EnterpriseServiceImpl implements EnterpriseService{
 		return enterprise;
 	}
 	@Override
-	public List<Enterprise> getAllEnterpriseByZoneId(String zoneName) {
-		Zone zone=zoneMapper.getZone(zoneName);
-		List<Enterprise> list=enterpriseMapper.getAllEnterpriseByZoneId(zone.getId());
+	public List<Enterprise> getAllEnterpriseByAddress(String address) {
+		//Zone zone=zoneMapper.getZone(zoneName);
+		List<Enterprise> list=enterpriseMapper.getAllEnterpriseByAddress(address);
 		Enterprise enterprise=new Enterprise();
 		Industry industry=new Industry();
 		for(int i=0;i<list.size();i++){
 			/*zone=zoneMapper.getZoneById(enterprise.getZoneId());
-			System.out.println(enterprise.getZoneId());*/
+			System.out.println(enterprise.getZoneId());
 			enterprise=list.get(i);
 			enterprise.setZoneName(zoneName);
-			System.out.println(enterprise.getZoneName());
+			System.out.println(enterprise.getZoneName());*/
 			industry=industryMapper.getIndustryById(enterprise.getIndustryId());
 			if(industry!=null){
 				enterprise.setIndustryName(industry.getName());

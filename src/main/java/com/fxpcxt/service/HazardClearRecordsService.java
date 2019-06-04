@@ -16,7 +16,10 @@ public interface HazardClearRecordsService {
 	public Boolean deleteHazardClearRecordsById(Long id);
 	public void updateHazardClearRecords(HazardClearRecords hazardClearRecords);
 	public List<HazardClearRecords> getHazardClearRecordsAll();
-	public List<HazardClearRecords> getEnterPriseHazardClearRecords(String enterpriseName);
+	public List<HazardClearRecords> getEnterPriseHazardClearRecords(String enterpriseName,String hazardType);
 	public HazardClearRecords getHazardClearRecordsById(Long id);
+	
+	public List<HazardClearRecords> getChangeRecordsByType(String hazardType);
+	public List<HazardClearRecords> hazardRecordsRecheck(String hazardType);
 	
 }

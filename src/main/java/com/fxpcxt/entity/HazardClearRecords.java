@@ -6,6 +6,7 @@ public class HazardClearRecords {
 	private Long id;
 	private Long hazardId;
 	private String hazardName;
+	private String hazardType;
 	private Long enterpriseId;
 	private String enterpriseName;
 	private Long checkerId;
@@ -13,13 +14,22 @@ public class HazardClearRecords {
 	private String checkImg;
 	private String checkReception;
 	private Date checkTime;
-	private Boolean status;
+	/*
+	 * "未处理",short 0
+	 * 
+	 * "已排查",short 1
+	 * 
+	 * "已整改",short 2
+	 */
+	private String status;
 	private String hazardLevel;
 	private Long changerId;
 	private String changerName;
 	private String changeImg;
 	private String changeReception;
 	private Date changeTime;
+	private String inspectionBasis;
+	private String checkStatus;
 	public Long getId() {
 		return id;
 	}
@@ -62,10 +72,10 @@ public class HazardClearRecords {
 	public void setCheckTime(Date checkTime) {
 		this.checkTime = checkTime;
 	}
-	public Boolean getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(Boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public String getHazardLevel() {
@@ -121,6 +131,24 @@ public class HazardClearRecords {
 	}
 	public void setChangerName(String changerName) {
 		this.changerName = changerName;
+	}
+	public String getHazardType() {
+		return hazardType;
+	}
+	public void setHazardType(String hazardType) {
+		this.hazardType = hazardType;
+	}
+	public String getInspectionBasis() {
+		return inspectionBasis;
+	}
+	public void setInspectionBasis(String inspectionBasis) {
+		this.inspectionBasis = inspectionBasis;
+	}
+	public String getCheckStatus() {
+		return checkStatus;
+	}
+	public void setCheckStatus(String checkStatus) {
+		this.checkStatus = checkStatus;
 	}
 	
 }

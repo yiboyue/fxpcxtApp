@@ -10,6 +10,6 @@ public interface EnterpriseService {
 	public Enterprise getEnterpriseById(Long id);
 	public void updateEnterprise(Enterprise enterPrise);
 	public Enterprise getEnterpriseIdByName(String name);
-	public List<Enterprise> getAllEnterpriseByZoneId(String zoneName);
+	public List<Enterprise> getAllEnterpriseByAddress(String address);
 	public List<Enterprise> selectAllEnterpriseInfo();
 }

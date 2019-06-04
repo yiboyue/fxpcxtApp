@@ -6,7 +6,7 @@
 	   <!--  <selectKey keyProperty="id" order="AFTER" resultType="Long">
 	      	select LAST_INSERT_ID()
 	    </selectKey> -->
-        insert into role(name,status) VALUES(#{name},#{status})
+        insert into role(name,status) VALUES(#{name},#{status},#{dataOperate})
     </insert>
     <delete id="deleteRoleById" parameterType="Long">
         delete from role where id=#{id}

@@ -7,6 +7,7 @@ public class Role {
 	private String name;
 	private Boolean status;
 	private List<Function> functions;
+	private String dataOperate;
 	public Long getId() {
 		return id;
 	}
@@ -30,6 +31,12 @@ public class Role {
 	}
 	public void setFunctions(List<Function> functions) {
 		this.functions = functions;
+	}
+	public String getDataOperate() {
+		return dataOperate;
+	}
+	public void setDataOperate(String dataOperate) {
+		this.dataOperate = dataOperate;
 	}
 	
 }

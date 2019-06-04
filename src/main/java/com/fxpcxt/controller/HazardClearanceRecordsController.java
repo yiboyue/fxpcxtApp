@@ -1,8 +1,11 @@
 package com.fxpcxt.controller;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +17,7 @@ import com.fxpcxt.entity.HazardClearRecords;
 import com.fxpcxt.service.HazardClearRecordsService;
 
 @RestController
-@RequestMapping(value = "hazardclearancerecords")
+@RequestMapping(value = "/hazardclearancerecords",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class HazardClearanceRecordsController {
 	@Autowired
 	private HazardClearRecordsService hazardClearRecordsService;
@@ -52,13 +55,31 @@ public class HazardClearanceRecordsController {
 		return CommonResponse.success(hazardClearRecords.getChangeImg());
 	}
 	@RequestMapping(value = "/selectRecordsByEnterpriseId", method = RequestMethod.POST)
-	public List<HazardClearRecords> getHazardClearanceRecordsById(@RequestParam String enterpriseName){
-		List<HazardClearRecords> hazardClearRecordsList=hazardClearRecordsService.getEnterPriseHazardClearRecords(enterpriseName);
+	public List<HazardClearRecords> getHazardClearanceRecordsById(@RequestParam(required=false) String enterpriseName,@RequestParam(required=false) String hazardType){
+		List<HazardClearRecords> hazardClearRecordsList=new ArrayList<HazardClearRecords>();
+		if (enterpriseName !=null || hazardType !=null) {
+			
+			hazardClearRecordsList=hazardClearRecordsService.getEnterPriseHazardClearRecords(enterpriseName,hazardType);
+		}
 		return hazardClearRecordsList;
 	}
 	@RequestMapping(value = "/selectAllRecords", method = RequestMethod.GET)
 	public List<HazardClearRecords> getAllRecords(){
-		List<HazardClearRecords> hazardClearRecordsList=hazardClearRecordsService.getHazardClearRecordsAll();
+		List<HazardClearRecords> hazardClearRecordsList = hazardClearRecordsService.getHazardClearRecordsAll();
 		return hazardClearRecordsList;
 	}
+	
+	@RequestMapping(value = "hazardclearancerecords/getInfoByType",method = RequestMethod.POST)
+	public List<HazardClearRecords> getChangeRecordsByType(@RequestParam String hazardType){
+		List<HazardClearRecords> list = hazardClearRecordsService.getChangeRecordsByType(hazardType);
+		return list;
+	}
+	
+	@RequestMapping(value = "hazardclearancerecords/Recheck",method = RequestMethod.POST)
+	public List<HazardClearRecords> hazardRecordsRecheck(@RequestParam String hazardType){
+		List<HazardClearRecords> list = hazardClearRecordsService.hazardRecordsRecheck(hazardType);
+		return list;
+	}
+	
+	
 }

@@ -1,6 +1,8 @@
 package com.fxpcxt.entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
 	private Long id;
 	private String account;
 	private String password;
@@ -13,6 +15,20 @@ public class User {
 	private Boolean status;
 	private Long orgnazationId;
 	private String orgnazationName;
+	private Long enterpriseId;
+	public Long getEnterpriseId() {
+		return enterpriseId;
+	}
+	public void setEnterpriseId(Long enterpriseId) {
+		this.enterpriseId = enterpriseId;
+	}
+	public String getEnterpriseName() {
+		return enterpriseName;
+	}
+	public void setEnterpriseName(String enterpriseName) {
+		this.enterpriseName = enterpriseName;
+	}
+	private String enterpriseName;
 	public Long getId() {
 		return id;
 	}
@@ -85,5 +101,4 @@ public class User {
 	public void setOrgnazationName(String orgnazationName) {
 		this.orgnazationName = orgnazationName;
 	}
-	
 }

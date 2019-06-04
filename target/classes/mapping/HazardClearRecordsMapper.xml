@@ -6,7 +6,7 @@
         insert into hazardClearRecords
         (hazardId,enterpriseId,checkerId,checkImg,checkReception,checkTime,status,hazardLevel,changerId,changeImg,changeReception)
          values
-         (#{hazardId},#{enterpriseId},#{checkerId},#{checkImg},#{checkReception},#{checkTime},#{status},#{hazardLevel},#{changerId},#{changeImg},#{changeReception})
+         (#{hazardId},#{enterpriseId},#{checkerId},#{checkImg},#{checkReception},#{checkTime},#{status},#{hazardLevel},#{changerId},#{changeImg},#{changeReception},#{inspectionBasis})
     </insert>
     
     <delete id="deleteHazardClearRecordsById" parameterType="Long" >
@@ -19,10 +19,16 @@
     <select id="getHazardClearRecordsAll" resultType="HazardClearRecords">
         select * from hazardClearRecords 
     </select>
-    <select id="getEnterPriseHazardClearRecords" parameterType="Long" resultType="HazardClearRecords">
-        select * from hazardClearRecords where enterpriseId=#{enterpriseId}
+    <select id="getEnterPriseHazardClearRecords"  resultType="HazardClearRecords">
+        select * from hazardClearRecords where enterpriseId=#{arg0} or hazardType=#{arg1}
     </select>
     <select id="getHazardClearRecordsById" parameterType="Long" resultType="HazardClearRecords">
-        select * from hazardClearRecords where id=#{id}
+        select * from hazardClearRecords where id=#{id} and statue = "未处理" or status ="已排查" 
+    </select>
+    <select id="getChangeRecordsByType" parameterType="String" resultType="HazardClearRecords">
+        select * from hazardClearRecords where hazardType=#{hazardType} and status = "已排查"
+    </select>
+    <select id="hazardRecordsRecheck" resultType="HazardClearRecords">
+        select * from hazardClearRecords where status="已整改" and changeStstus="审核中" and hazardType=#{hazardType}
     </select>
 </mapper>

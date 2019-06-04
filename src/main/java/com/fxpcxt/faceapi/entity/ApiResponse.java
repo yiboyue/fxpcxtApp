@@ -21,6 +21,7 @@ public class ApiResponse {
 	@JsonProperty("error_code")
 	private int errorCode;
 	
+	@JsonProperty("timestamp")
 	private long timeStamp;
 
 	public ApiResult getResult() {

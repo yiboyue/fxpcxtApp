@@ -5,7 +5,7 @@ public class Enterprise {
 	private Long zoneId;
 	private String zoneName;
 	private String name;
-	private String Linkman;
+	private String linkman;
 	private String address;
 	private String phone;
 	private String fundTime;
@@ -102,10 +102,10 @@ public class Enterprise {
 		this.zoneName = zoneName;
 	}
 	public String getLinkman() {
-		return Linkman;
+		return linkman;
 	}
 	public void setLinkman(String linkman) {
-		Linkman = linkman;
+		this.linkman = linkman;
 	}
 	public String getIndustryName() {
 		return industryName;

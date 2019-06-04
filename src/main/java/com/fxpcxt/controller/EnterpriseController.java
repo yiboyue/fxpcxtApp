@@ -3,6 +3,7 @@ package com.fxpcxt.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +14,7 @@ import com.fxpcxt.entity.Enterprise;
 import com.fxpcxt.service.EnterpriseService;
 
 @RestController
-@RequestMapping(value = {"/enterprise"})
+@RequestMapping(value = {"/enterprise"},produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class EnterpriseController {
 	@Autowired
 	private EnterpriseService enterpriseService;
@@ -23,7 +24,7 @@ public class EnterpriseController {
 		enterpriseService.saveEnterprise(enterprise);
 		return true;
 	}
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public Boolean deleteEnterprise(@RequestParam Long id){
 		return enterpriseService.deleteEnterpeiseById(id);
 	
@@ -34,9 +35,9 @@ public class EnterpriseController {
 		return true;
 		
 	}
-	@RequestMapping(value = "/selectAll", method = RequestMethod.GET)
-	public List<Enterprise> getAllEnterprise(@RequestParam String zoneName){
-		List<Enterprise> entepriseList = enterpriseService.getAllEnterpriseByZoneId(zoneName);
+	@RequestMapping(value = "/selectAll", method = RequestMethod.POST)
+	public List<Enterprise> getAllEnterprise(@RequestParam String address){
+		List<Enterprise> entepriseList = enterpriseService.getAllEnterpriseByAddress(address);
 		return entepriseList;
 	}
 	@RequestMapping(value="/selectAllEnterprise",method=RequestMethod.GET)
