@@ -29,4 +29,19 @@ public class FileUtil {
             file.mkdirs();
         }
     }
+    
+    /**
+	 * 获取文件扩展名
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public static String getFileExtension(File file) {
+		String fileName = file.getName();
+		if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
+			return fileName.substring(fileName.lastIndexOf(".") + 1);
+		} else {
+			return "";
+		}
+	}
 }
