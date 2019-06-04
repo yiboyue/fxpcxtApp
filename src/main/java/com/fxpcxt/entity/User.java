@@ -2,8 +2,6 @@ package com.fxpcxt.entity;
 
 import java.io.Serializable;
 
-import com.fxpcxt.context.AppContext;
-
 public class User implements Serializable{
 	private Long id;
 	private String account;
@@ -103,8 +101,4 @@ public class User implements Serializable{
 	public void setOrgnazationName(String orgnazationName) {
 		this.orgnazationName = orgnazationName;
 	}
-	@Override
-    public String toString() {
-        return AppContext.toJson(this);
-    }
 }

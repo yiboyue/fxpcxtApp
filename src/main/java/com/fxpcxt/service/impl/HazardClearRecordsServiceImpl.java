@@ -134,7 +134,8 @@ public class HazardClearRecordsServiceImpl implements HazardClearRecordsService 
 	public List<HazardClearRecords> getHazardClearRecordsAll() {
 		CoreContext coreContext=AppContext.getBizContext();
 		Long enterpriseId=coreContext.getUser().getEnterpriseId();
-		List<HazardClearRecords> list=hazardClearRecordsMapper.getEnterPriseHazardClearRecords(enterpriseId);
+		List<HazardClearRecords> list=hazardClearRecordsMapper.getHazardClearRecordsAll();
+//		List<HazardClearRecords> list=hazardClearRecordsMapper.getEnterPriseHazardClearRecords(enterpriseId);
 		HazardClearRecords hazardClearRecords=new HazardClearRecords();
 		Hazard hazard=new Hazard();
 		Enterprise enterprise=enterpriseMapper.getEnterpriseById(enterpriseId);
@@ -193,12 +194,12 @@ public class HazardClearRecordsServiceImpl implements HazardClearRecordsService 
 	}
 
 	@Override
-	public List<HazardClearRecords> getEnterPriseHazardClearRecords(String enterpriseName) {
+	public List<HazardClearRecords> getEnterPriseHazardClearRecords(String enterpriseName,String hazardType) {
 		Enterprise enterprise=enterpriseMapper.getEnterpriseIdByName(enterpriseName);
 		if(enterprise == null){
 			return new ArrayList<>();
 		}
-		List<HazardClearRecords> list=hazardClearRecordsMapper.getEnterPriseHazardClearRecords(enterprise.getId());
+		List<HazardClearRecords> list=hazardClearRecordsMapper.getEnterPriseHazardClearRecords(enterprise.getId(),hazardType);
 		HazardClearRecords hazardClearRecords=new HazardClearRecords();
 		Hazard hazard=new Hazard();
 		Checker checker=new Checker();
@@ -227,5 +228,18 @@ public class HazardClearRecordsServiceImpl implements HazardClearRecordsService 
 	public HazardClearRecords getHazardClearRecordsById(Long id) {
 		
 		return hazardClearRecordsMapper.getHazardClearRecordsById(id);
+	}
+
+	@Override
+	public List<HazardClearRecords> getChangeRecordsByType(String hazardType) {
+		// TODO Auto-generated method stub
+		
+		return hazardClearRecordsMapper.getChangeRecordsByType(hazardType);
+	}
+
+	@Override
+	public List<HazardClearRecords> hazardRecordsRecheck(String hazardType) {
+		// TODO Auto-generated method stub
+		return hazardClearRecordsMapper.hazardRecordsRecheck(hazardType);
 	}
 }
