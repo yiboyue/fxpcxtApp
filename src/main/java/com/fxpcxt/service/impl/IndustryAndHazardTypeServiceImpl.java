@@ -9,7 +9,7 @@ import com.fxpcxt.dao.IndustryAndHazardTypeMapper;
 import com.fxpcxt.entity.IndustryAndHazardType;
 import com.fxpcxt.service.IndustryAndHazardTypeService;
 
-@Service("IndustryService")
+@Service("IndustryAndHazardTypeService")
 public class IndustryAndHazardTypeServiceImpl implements IndustryAndHazardTypeService{
 	@Autowired
 	IndustryAndHazardTypeMapper industryAndHazardTypeMapper;
