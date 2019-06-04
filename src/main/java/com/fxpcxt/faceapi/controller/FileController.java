@@ -4,26 +4,28 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.UUID;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fxpcxt.common.CommonResponse;
+import com.fxpcxt.entity.Industry;
+import com.fxpcxt.entity.IndustryAndHazardType;
 import com.fxpcxt.faceapi.entity.FileMeta;
 import com.fxpcxt.faceapi.utils.FileUtil;
+import com.fxpcxt.service.IndustryAndHazardTypeService;
+import com.fxpcxt.service.IndustryService;
 
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
-import utils.FileKit;
 
 @RestController
 @RequestMapping(value = {"/file"})
@@ -32,6 +34,12 @@ public class FileController {
 	private String file_path;
 	
 	private static final String EXCELPATTERN = "^(XLSX|xlsx|csv|CSV)$";
+	
+	@Autowired
+	private IndustryService industryService;
+	
+	@Autowired
+	private IndustryAndHazardTypeService industryAndHazardTypeService;
 	
 	@RequestMapping(value =  "/upload")
 	public CommonResponse<String> upload(@RequestParam("file") MultipartFile file) throws Exception {
@@ -99,7 +107,17 @@ public class FileController {
         ImportParams params = new ImportParams();
         params.setTitleRows(1);
         params.setHeadRows(1);
-        List<E>  = ExcelImportUtil.importExcel(excelFile, pojoClass, params);
-        return CommonResponse.success(fileMeta.getFileName());
+        if("IndustryAndHazardType".equals(type)){
+        	List<IndustryAndHazardType> industryAndHazardTypes= ExcelImportUtil.importExcel(excelFile, IndustryAndHazardType.class, params);
+        	Industry industry = null;
+        	for (IndustryAndHazardType industryAndHazardType : industryAndHazardTypes) {
+        		industry = industryService.getIndustry(industryAndHazardType.getIndustyName());
+        		if(industry != null){
+        			industryAndHazardType.setIndustyId(industry.getId());
+        		}
+			}
+        	industryAndHazardTypeService.saveAll(industryAndHazardTypes);
+        }
+        return CommonResponse.success("导入成功");
 	}
 }
