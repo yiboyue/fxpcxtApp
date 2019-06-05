@@ -6,4 +6,6 @@ import com.fxpcxt.entity.IndustryAndHazardType;
 
 public interface IndustryAndHazardTypeMapper {
 	public void saveAll(List<IndustryAndHazardType> industryAndHazardTypes);
+	
+	public List<IndustryAndHazardType> selectAllByIndustryName(String industryName);
 }

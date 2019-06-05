@@ -16,6 +16,6 @@ public interface HazardClearRecordsMapper {
 	public List<HazardClearRecords> getEnterPriseHazardClearRecords(Long enterpriseId,String hazardType);
 	public HazardClearRecords getHazardClearRecordsById(Long id);
 	
-	public List<HazardClearRecords> getChangeRecordsByType(String hazardType);
-	public List<HazardClearRecords> hazardRecordsRecheck(String hazardType);
+	public List<HazardClearRecords> getChangeRecordsByType(Long enterpriseId,String hazardType);
+	public List<HazardClearRecords> hazardRecordsRecheck(Long enterpriseId,String hazardType);
 }

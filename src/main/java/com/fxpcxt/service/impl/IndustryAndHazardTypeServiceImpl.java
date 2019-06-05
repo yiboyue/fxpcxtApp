@@ -18,4 +18,11 @@ public class IndustryAndHazardTypeServiceImpl implements IndustryAndHazardTypeSe
 	public void saveAll(List<IndustryAndHazardType> industryAndHazardTypes) {
 		industryAndHazardTypeMapper.saveAll(industryAndHazardTypes);
 	}
+
+	@Override
+	public List<IndustryAndHazardType> selectAllByIndustryName(String industryName) {
+		// TODO Auto-generated method stub
+		List<IndustryAndHazardType> list = industryAndHazardTypeMapper.selectAllByIndustryName(industryName);
+		return list;
+	}
 }

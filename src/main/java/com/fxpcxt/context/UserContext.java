@@ -20,7 +20,7 @@ public class UserContext implements CoreContext{
 	/**
      * Authorization
      */
-    static final String AUTHORIZATION_HEADER_NAME = PropertyReader.getInstance().getProperty("authorization.header","Authorization");
+    static final String AUTHORIZATION_HEADER_NAME = "Token";
     
     /**
      * 权限数据长度

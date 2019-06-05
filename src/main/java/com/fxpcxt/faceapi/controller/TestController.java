@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fxpcxt.common.CommonResponse;
+import com.fxpcxt.context.AppContext;
 import com.fxpcxt.faceapi.entity.ApiResponse;
 import com.fxpcxt.faceapi.entity.FileMeta;
 import com.fxpcxt.faceapi.utils.ApiFaceUtil;
@@ -36,6 +37,9 @@ public class TestController {
 		} catch (IOException e) {
 			return null;
 		}
+        if(userId == null){
+        	userId = AppContext.getBizContext().getUser().getId();
+        }
         return CommonResponse.success(ApiFaceUtil.addUser(fileMeta.getBytes(), userId));
 	}
 	

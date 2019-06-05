@@ -19,16 +19,27 @@
     <select id="getHazardClearRecordsAll" resultType="HazardClearRecords">
         select * from hazardClearRecords 
     </select>
-    <select id="getEnterPriseHazardClearRecords"  resultType="HazardClearRecords">
+    <!-- <select id="getEnterPriseHazardClearRecords"  resultType="HazardClearRecords">
         select * from hazardClearRecords where enterpriseId=#{arg0} or hazardType=#{arg1}
-    </select>
+    </select> -->
     <select id="getHazardClearRecordsById" parameterType="Long" resultType="HazardClearRecords">
-        select * from hazardClearRecords where id=#{id} and statue = "未处理" or status ="已排查" 
+        select * from hazardClearRecords where id=#{id} 
     </select>
-    <select id="getChangeRecordsByType" parameterType="String" resultType="HazardClearRecords">
+   <!--  <select id="getChangeRecordsByType" parameterType="String" resultType="HazardClearRecords">
         select * from hazardClearRecords where hazardType=#{hazardType} and status = "已排查"
     </select>
     <select id="hazardRecordsRecheck" resultType="HazardClearRecords">
         select * from hazardClearRecords where status="已整改" and changeStstus="审核中" and hazardType=#{hazardType}
+    </select> -->
+    
+    
+    <select id="getEnterPriseHazardClearRecords" resultType="HazardClearRecords">
+        select * from hazardClearRecords where enterpriseId=#{arg0} or hazardType=#{arg1} and status = "未处理" or status ="已排查" 
+    </select>
+    <select id="getChangeRecordsByType"  resultType="HazardClearRecords">
+        select * from hazardClearRecords where enterpriseId=#{arg0} or hazardType=#{arg1} and status = "已排查"
+    </select>
+    <select id="hazardRecordsRecheck" resultType="HazardClearRecords">
+        select * from hazardClearRecords where enterpriseId=#{arg0} or hazardType=#{arg1} and status="已整改" and changeStatus="审核中"
     </select>
 </mapper>

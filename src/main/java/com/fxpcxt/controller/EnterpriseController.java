@@ -40,7 +40,7 @@ public class EnterpriseController {
 		List<Enterprise> entepriseList = enterpriseService.getAllEnterpriseByAddress(address);
 		return entepriseList;
 	}
-	@RequestMapping(value="/selectAllEnterprise",method=RequestMethod.GET)
+	@RequestMapping(value="/selectAllEnterprise",method=RequestMethod.POST)
 	public List<Enterprise> selectAllEnterpriseInfo(){
 		return enterpriseService.selectAllEnterpriseInfo();
 	}

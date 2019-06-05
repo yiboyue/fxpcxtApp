@@ -77,12 +77,12 @@ public class ControllerInterceptor {
 		MethodSignature methodSignature = (MethodSignature) signature;
 		Method method = methodSignature.getMethod();
 		NoToken noToken = method.getAnnotation(NoToken.class);
-//		CoreContext context = new UserContext(request, noToken);
-//		AppContext.setBizContext(context);
-//		if(context!=null) {
-//			logger.debug("请求开始, url: {}, method: {}, detail: {}, query: {}", url, methodString, context.getUser().toString(), queryString);
-//		}else{
-//			logger.error("请求开始, url: {}, method: {}, query: {}", url, methodString, queryString);
-//		}
+		CoreContext context = new UserContext(request, noToken);
+		AppContext.setBizContext(context);
+		if(context!=null) {
+			logger.debug("请求开始, url: {}, method: {}, detail: {}, query: {}", url, methodString, context.getUser().toString(), queryString);
+		}else{
+			logger.error("请求开始, url: {}, method: {}, query: {}", url, methodString, queryString);
+		}
 	}
 }

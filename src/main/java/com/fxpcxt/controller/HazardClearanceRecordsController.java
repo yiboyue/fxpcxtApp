@@ -69,16 +69,28 @@ public class HazardClearanceRecordsController {
 		return hazardClearRecordsList;
 	}
 	
-	@RequestMapping(value = "hazardclearancerecords/getInfoByType",method = RequestMethod.POST)
-	public List<HazardClearRecords> getChangeRecordsByType(@RequestParam String hazardType){
-		List<HazardClearRecords> list = hazardClearRecordsService.getChangeRecordsByType(hazardType);
-		return list;
+	@RequestMapping(value = "/getInfoByType",method = RequestMethod.POST)
+	public List<HazardClearRecords> getChangeRecordsByType(@RequestParam String enterpriseName,@RequestParam String hazardType){
+		List<HazardClearRecords> hazardClearRecordsList=new ArrayList<HazardClearRecords>();
+		if (enterpriseName !=null || hazardType !=null) {
+			
+			hazardClearRecordsList=hazardClearRecordsService.getChangeRecordsByType(enterpriseName,hazardType);
+		}
+		return hazardClearRecordsList;
+		
 	}
 	
-	@RequestMapping(value = "hazardclearancerecords/Recheck",method = RequestMethod.POST)
-	public List<HazardClearRecords> hazardRecordsRecheck(@RequestParam String hazardType){
-		List<HazardClearRecords> list = hazardClearRecordsService.hazardRecordsRecheck(hazardType);
-		return list;
+	@RequestMapping(value = "/Recheck",method = RequestMethod.POST)
+	public List<HazardClearRecords> hazardRecordsRecheck(@RequestParam String enterpriseName,@RequestParam String hazardType){
+		List<HazardClearRecords> hazardClearRecordsList=new ArrayList<HazardClearRecords>();
+		if (enterpriseName !=null || hazardType !=null) {
+			
+			hazardClearRecordsList=hazardClearRecordsService.hazardRecordsRecheck(enterpriseName,hazardType);
+		}
+		return hazardClearRecordsList;
+		
+		//List<HazardClearRecords> list = hazardClearRecordsService.hazardRecordsRecheck(hazardType);
+		//return list;
 	}
 	
 	

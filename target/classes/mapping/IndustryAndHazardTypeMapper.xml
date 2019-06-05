@@ -9,4 +9,7 @@
               #{item.hazardType})
          </foreach>
     </insert>
+    <select id="selectAllByIndustryName" parameterType="String" resultType="IndustryAndHazardType">
+        select * from IndustryAndHazardType where industryName=#{industryName}
+    </select>
 </mapper>

@@ -226,20 +226,76 @@ public class HazardClearRecordsServiceImpl implements HazardClearRecordsService 
 
 	@Override
 	public HazardClearRecords getHazardClearRecordsById(Long id) {
-		
 		return hazardClearRecordsMapper.getHazardClearRecordsById(id);
 	}
 
 	@Override
-	public List<HazardClearRecords> getChangeRecordsByType(String hazardType) {
+	public List<HazardClearRecords> getChangeRecordsByType(String enterpriseName,String hazardType) {
 		// TODO Auto-generated method stub
+		Enterprise enterprise=enterpriseMapper.getEnterpriseIdByName(enterpriseName);
+		if(enterprise == null){
+			return new ArrayList<>();
+		}
+		List<HazardClearRecords> list=hazardClearRecordsMapper.getChangeRecordsByType(enterprise.getId(),hazardType);
+		HazardClearRecords hazardClearRecords=new HazardClearRecords();
+		Hazard hazard=new Hazard();
+		Checker checker=new Checker();
+		User user=new User();
+		for(int i=0;i<list.size();i++){
+			hazardClearRecords=list.get(i);
+			hazard=hazardMapper.getHazardById(hazardClearRecords.getHazardId());
+			if(hazard!=null){
+				hazardClearRecords.setHazardName(hazard.getName());
+			}
+			hazardClearRecords.setEnterpriseName(enterpriseName);
+			checker=checkerMapper.getCheckerById(hazardClearRecords.getCheckerId());
+			if(checker!=null){
+				hazardClearRecords.setCheckerName(checker.getName());
+			}
+			user=userMapper.getUserById(hazardClearRecords.getChangerId());
+			if(user!=null){
+				hazardClearRecords.setChangerName(user.getName());
+			}
+			
+		}
+		return list;
 		
-		return hazardClearRecordsMapper.getChangeRecordsByType(hazardType);
+		
+		//return hazardClearRecordsMapper.getChangeRecordsByType(hazardType);
 	}
 
 	@Override
-	public List<HazardClearRecords> hazardRecordsRecheck(String hazardType) {
+	public List<HazardClearRecords> hazardRecordsRecheck(String enterpriseName,String hazardType) {
 		// TODO Auto-generated method stub
-		return hazardClearRecordsMapper.hazardRecordsRecheck(hazardType);
+		Enterprise enterprise=enterpriseMapper.getEnterpriseIdByName(enterpriseName);
+		if(enterprise == null){
+			return new ArrayList<>();
+		}
+		List<HazardClearRecords> list=hazardClearRecordsMapper.hazardRecordsRecheck(enterprise.getId(),hazardType);
+		HazardClearRecords hazardClearRecords=new HazardClearRecords();
+		Hazard hazard=new Hazard();
+		Checker checker=new Checker();
+		User user=new User();
+		for(int i=0;i<list.size();i++){
+			hazardClearRecords=list.get(i);
+			hazard=hazardMapper.getHazardById(hazardClearRecords.getHazardId());
+			if(hazard!=null){
+				hazardClearRecords.setHazardName(hazard.getName());
+			}
+			hazardClearRecords.setEnterpriseName(enterpriseName);
+			checker=checkerMapper.getCheckerById(hazardClearRecords.getCheckerId());
+			if(checker!=null){
+				hazardClearRecords.setCheckerName(checker.getName());
+			}
+			user=userMapper.getUserById(hazardClearRecords.getChangerId());
+			if(user!=null){
+				hazardClearRecords.setChangerName(user.getName());
+			}
+			
+		}
+		return list;
+		
+		
+		//return hazardClearRecordsMapper.hazardRecordsRecheck(hazardType);
 	}
 }

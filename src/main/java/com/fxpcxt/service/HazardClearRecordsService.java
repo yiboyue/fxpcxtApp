@@ -19,7 +19,7 @@ public interface HazardClearRecordsService {
 	public List<HazardClearRecords> getEnterPriseHazardClearRecords(String enterpriseName,String hazardType);
 	public HazardClearRecords getHazardClearRecordsById(Long id);
 	
-	public List<HazardClearRecords> getChangeRecordsByType(String hazardType);
-	public List<HazardClearRecords> hazardRecordsRecheck(String hazardType);
+	public List<HazardClearRecords> getChangeRecordsByType(String enterpriseName,String hazardType);
+	public List<HazardClearRecords> hazardRecordsRecheck(String enterpriseName,String hazardType);
 	
 }
